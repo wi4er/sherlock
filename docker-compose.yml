@@ -3,7 +3,7 @@ version: "2.2"
 services:
   mongo:
     image: mongo:5.0.4
-    container_name: charon_mongo
+    container_name: sherlock_mongo
     ports:
       - "27017:27017"
     environment:
@@ -15,7 +15,7 @@ services:
 
   search:
     image: node:latest
-    container_name: search_api
+    container_name: sherlock_api
     working_dir: /app
     command: npm start
     links:
@@ -28,12 +28,12 @@ services:
 
   product:
     image: wi4er/groot:0.11.5
-    container_name: product_api
+    container_name: sherlock_product
     environment:
       DB_HOST: mongo
-      DB_USER: user
+      DB_USER: product
       DB_PASSWORD: example
-      DB_NAME: user
+      DB_NAME: product
       CACHE_HOST: cache
     links:
       - mongo
@@ -43,7 +43,7 @@ services:
 
   cache:
     image: redis:alpine
-    container_name: charon_cache
+    container_name: sherlock_cache
     ports:
       - "6379:6379"
     volumes:
