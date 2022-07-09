@@ -9,7 +9,7 @@ class Environment {
     }
 
     get TARGET_HOST() {
-        return process.env.USER_HOST;
+        return process.env.TARGET_HOST;
     }
 
     get SECRET() {

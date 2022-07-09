@@ -1,0 +1,11 @@
+/data
+/coverage
+/.idea
+/init
+/test
+/docker-compose.yml
+/build.sh
+/.git
+/.gitignore
+
+
