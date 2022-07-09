@@ -6,7 +6,7 @@ function postContent(items) {
     items[Symbol.iterator] ?? (items = [items]);
 
     for (const it of items) {
-        list.push(fetch.post("/content/", {data: it}).then(resp => resp.data));
+        list.push(fetch.post("/content/", it).then(resp => resp.data));
     }
 
     return Promise.all(list);

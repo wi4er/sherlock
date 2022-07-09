@@ -12,3 +12,18 @@ product.createUser(
         ]
     }
 );
+
+product.runCommand(
+    {
+        insert: "descriptions",
+        documents: [{
+            _id: "preview",
+            timestamp: new Date(),
+            created: new Date(),
+        }, {
+            _id: "detail",
+            timestamp: new Date(),
+            created: new Date(),
+        }]
+    }
+);

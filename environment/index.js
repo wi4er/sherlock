@@ -12,10 +12,6 @@ class Environment {
         return process.env.USER_HOST;
     }
 
-    get TARGET_PORT() {
-        return process.env.USER_PORT;
-    }
-
     get SECRET() {
         return process.env.SECRET;
     }
