@@ -20,6 +20,8 @@ describe("Search in list", () => {
             }
         }]);
 
-        console.log(res.search("qwe"));
+
+
+        console.log(res("couple"));
     });
 });

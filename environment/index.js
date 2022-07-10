@@ -19,6 +19,14 @@ class Environment {
     get ACCESS_TOKEN() {
         return process.env.ACCESS_TOKEN;
     }
+
+    get PERMISSION_GROUPS() {
+        return process.env.PERMISSION_GROUPS;
+    }
+
+    get REINDEX_INTERVAL() {
+        return process.env.REINDEX_INTERVAL ?? 30000;
+    }
 }
 
 module.exports = new Environment();

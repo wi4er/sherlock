@@ -7,7 +7,8 @@ afterEach(() => require("../../test/clearProductDatabase")());
 jest.mock("../../environment", () => ({
     TARGET_HOST: "localhost:8081",
     SECRET: "hello world!",
-    ACCESS_TOKEN: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW4iOnRydWUsImlhdCI6MTY1Mzg3NDAxM30.PDa_NPahbV8-xPlb4djOuQLr-xpMBvs8-LXiV-bzdZU"
+    ACCESS_TOKEN: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW4iOnRydWUsImlhdCI6MTY1Mzg3NDAxM30.PDa_NPahbV8-xPlb4djOuQLr-xpMBvs8-LXiV-bzdZU",
+    PERMISSION_GROUPS: "123",
 }));
 
 describe("Content endpoint", () => {
@@ -32,6 +33,7 @@ describe("Content endpoint", () => {
 
             await request(app)
                 .get("/search/?q=DATA")
+                .set(...require("../../test/createToken")())
                 .expect(200)
                 .then(res => {
                     expect(res.body).toEqual(["1".padStart(24, "0")])

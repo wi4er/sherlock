@@ -17,12 +17,16 @@ services:
     image: node:latest
     container_name: sherlock_api
     working_dir: /app
-    command: npm start
+    command: npm run dev
     links:
       - product
       - cache
     ports:
       - "8082:8080"
+    environment:
+      TARGET_HOST: "product:8080"
+      SECRET: "hello world!"
+      ACCESS_TOKEN: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWRtaW4iOnRydWUsImlhdCI6MTY1Mzg3NDAxM30.PDa_NPahbV8-xPlb4djOuQLr-xpMBvs8-LXiV-bzdZU"
     volumes:
       - .:/app
 

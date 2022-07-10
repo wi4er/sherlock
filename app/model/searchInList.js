@@ -4,7 +4,7 @@ function searchInList(hay) {
     const index = createIndex(hay);
 
     return needle => {
-        index.search(`*${needle}*`);
+        return index.search(`${needle}~2`);
     }
 }
 

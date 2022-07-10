@@ -1,25 +1,19 @@
-const Permission = require("../model/Permission");
 const PermissionError = require("../exception/PermissionError");
-const {PUBLIC} = require("./entity");
-const environment = require("../../environment");
+const env = require("../../environment");
 
 
 module.exports = (entity, method) => (req, res, next) => {
-    if (entity.includes(PUBLIC)) {
-        next();
+    if (!env.PERMISSION_GROUPS) {
+        return next();
     }
 
-    Permission.findOne({
-        entity: {$in: entity},
-        method,
-        group: {$in: req.user?.group},
-    })
-        .then(row => {
-            if (!row && !req.user?.admin) {
-                next(new PermissionError("Permission denied!"));
-            }
+    if (req.user?.admin) {
+        return next();
+    }
 
-            next();
-        })
-        .catch(next);
+    PermissionError.assert(req.user, "User required!");
+
+    if (req.user?.groups?.includes?.(env.PERMISSION_GROUPS)) {
+        return next();
+    }
 }

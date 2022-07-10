@@ -3,7 +3,7 @@ try {
 
     app.use(require("cors")({}));
     app.use(require('body-parser').json());
-    // app.use(require("./permission"));
+    app.use(require("./permission"));
 
     app.get("/", (req, res) => {
         res.send("<h1 style='display: flex; align-items: center; justify-content: center; height: 100vh'> $$$ SHERLOCK $$$ </h1>");
