@@ -1,6 +1,5 @@
 const {Router} = require("express");
 const router = Router();
-const createIndex = require("../model/createIndex");
 const searchInList = require("../model/searchInList");
 const fetchContent = require("../fetch/fetchContent");
 const checkPermission = require("../permission/check");
@@ -17,8 +16,6 @@ function reindex() {
 function start() {
     let search;
 
-    reindex().then(res => search = res);
-
     setInterval(() => {
         reindex().then(res => search = res);
     }, env.REINDEX_INTERVAL);
@@ -28,10 +25,11 @@ function start() {
 
         Promise.resolve()
             .then(() => {
-                const found = search(q);
-
-                res.json(found.map(item => item.ref));
+                if (!search) {
+                    return reindex().then(res => search = res);
+                }
             })
+            .then(() => res.json(search(q).map(item => item.ref)))
             .catch(next);
     }
 }
